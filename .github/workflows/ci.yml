@@ -21,20 +21,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Download and Install ChromeDriver
+      - name: Download Specific ChromeDriver Version
         run: |
-          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d. -f1)
-          DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
-          echo "Downloading ChromeDriver version $DRIVER_VERSION"
+          DRIVER_VERSION="124.0.6367.60"  # Проверь актуальную версию тут: https://sites.google.com/chromium.org/driver/
           wget -q "https://chromedriver.storage.googleapis.com/$DRIVER_VERSION/chromedriver_linux64.zip"
-          
-          # Проверяем, скачался ли файл
-          if [ ! -f chromedriver_linux64.zip ]; then
-            echo "Error: ChromeDriver zip file not found!"
-            exit 1
-          fi
-          
-          # Разархивируем
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
