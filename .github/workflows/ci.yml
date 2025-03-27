@@ -16,10 +16,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2  # Шаг для скачивания кода из репозитория.
 
-      - name: Set up JDK 11
+      - name: Set up JDK
         uses: actions/setup-java@v2
         with:
-          java-version: '11'  # Указываем версию JDK для тестов (можно использовать и другую версию).
+          distribution: 'temurin'  # или другая JDK (adopt, zulu, corretto и т. д.)
+          java-version: '11'
 
       - name: Build with Maven
         run: mvn clean install  # Компиляция и запуск тестов с помощью Maven.
